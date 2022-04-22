@@ -1,3 +1,15 @@
+# v1.1.4 (Fri Apr 22 2022)
+
+#### 🐛 Bug Fix
+
+- Auto test 1 [#1](https://github.com/adam-in-ict/graph-sentry-auto-test/pull/1) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### Authors: 1
+
+- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
+
+---
+
 # v1.1.3 (Fri Apr 22 2022)
 
 #### ⚠️ Pushed to `main`
