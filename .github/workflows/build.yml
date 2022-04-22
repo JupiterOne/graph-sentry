@@ -51,7 +51,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          yarn auto shipit
+          npx auto shipit
 
       # Fetch tags and describe the commit before the merge commit
       # to see if it's a version publish
