@@ -52,7 +52,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           yarn
-          npx auto version
           echo "VERSION=`echo $(npx auto version)`" >> $GITHUB_ENV
           echo "publish=true" >> $GITHUB_ENV
 
