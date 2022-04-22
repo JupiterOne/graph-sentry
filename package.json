@@ -44,7 +44,13 @@
   "author": "adam-in-ict <adam.pierson@jupiterone.com>",
   "auto": {
     "plugins": [
-      "npm"
+      [
+        "npm",
+        {
+          "setRcToken": false
+        }
+      ],
+      "released"
     ]
   }
 }
