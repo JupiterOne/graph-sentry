@@ -45,7 +45,7 @@ jobs:
 
       - name: Test auto
         run: |
-          auto shipit
+          yarn auto shipit
 
       # Fetch tags and describe the commit before the merge commit
       # to see if it's a version publish
