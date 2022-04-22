@@ -1,6 +1,6 @@
 {
   "name": "graph-sentry-auto-test",
-  "version": "1.1.4--canary.e333465.1",
+  "version": "1.1.4--canary.78d6d93.0",
   "description": "TESTING.  DO NOT USE.  JupiterOne integration for ingesting data from Sentry.io",
   "license": "MPL-2.0",
   "main": "src/index.js",
@@ -44,13 +44,7 @@
   "author": "adam-in-ict <adam.pierson@jupiterone.com>",
   "auto": {
     "plugins": [
-      [
-        "npm",
-        {
-          "setRcToken": false
-        }
-      ],
-      "released"
+      "npm"
     ]
   }
 }
