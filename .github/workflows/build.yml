@@ -47,9 +47,8 @@ jobs:
         run: yarn
 
       - name: Test auto
-        environment: test
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.test.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           yarn auto shipit
