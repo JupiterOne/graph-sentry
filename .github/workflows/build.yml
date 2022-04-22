@@ -44,6 +44,10 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Test auto
+        run: |
+          auto shipit
+
       # Fetch tags and describe the commit before the merge commit
       # to see if it's a version publish
       - name: Fetch tags
