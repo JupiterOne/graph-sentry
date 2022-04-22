@@ -46,17 +46,15 @@ jobs:
 
       # Fetch tags and describe the commit before the merge commit
       # to see if it's a version publish
-      - name: Fetch tags
+      - name: Auto version check
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          git fetch --tags
-          if git describe --exact-match --match "v*.*.*" HEAD^2
-          then
-            echo "Found version commit tag. Publishing."
-            echo "publish=true" >> $GITHUB_ENV
-            echo "VERSION_NUM=`echo $(git describe --tags --abbrev=0 | sed -e "s/v//gI")`" >> $GITHUB_ENV
-          else
-            echo "Version commit tag not found. Not publishing."
-          fi
+          yarn
+          npx auto version
+          echo "VERSION=`echo $(npx auto version)`" >> $GITHUB_ENV
+          echo "publish=true" >> $GITHUB_ENV
 
       - name: Publish
         if: env.publish == 'true'
@@ -65,6 +63,9 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
           yarn
+          echo "Setting version based on $VERSION"
+          npm version $VERSION -m "Bump version to: %s [skip ci]"
+          git push --follow-tags
           yarn build
           npm publish ./dist
 
