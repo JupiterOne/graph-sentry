@@ -39,5 +39,10 @@
   },
   "dependencies": {
     "axios": "^0.24.0"
+  },
+  "auto": {
+    "plugins": [
+      "npm"
+    ]
   }
 }
