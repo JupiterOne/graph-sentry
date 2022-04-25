@@ -72,15 +72,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_USER_EMAIL: ${{ github.event.pull_request.user.email }}
+          GH_USER_URL: ${{ github.event.pull_request.user.url }}
           GH_USER: ${{ github.event.pull_request.user.login }}
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           yarn
           # npx auto shipit
           echo "Setting version based on $VERSION"
-          echo "Using $GH_USER_EMAIL and $GH_USER for commits"
-          git config user.email "$GH_USER_EMAIL"
+          echo "Using $GH_USER_URL and $GH_USER for commits"
+          git config user.email "$GH_USER_URL"
           git config user.name "$GH_USER"
           npm version $VERSION -m "Bump version to: %s [skip ci]"
           git push --follow-tags
