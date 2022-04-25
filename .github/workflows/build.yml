@@ -30,6 +30,7 @@ jobs:
       - name: Extra test
         run: |
           echo "Checking GH Event value"
+          echo "Github login: ${{ github.event.pull_request.user.login }}""
           echo "Github event: ${{ toJson(github.event) }}"
 
   # Publishing is done in a separate job to allow
