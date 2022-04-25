@@ -62,7 +62,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_USER_EMAIL: ${{ github.event.pull_request.user.email }}
-          GH_USER: {{ github.event.pull_request.user.login }}
+          GH_USER: ${{ github.event.pull_request.user.login }}
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           yarn
