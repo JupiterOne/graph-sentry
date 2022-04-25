@@ -28,9 +28,13 @@ jobs:
         run: yarn build
 
       - name: Extra test
+        env:
+          GH_USER_URL: ${{ github.event.pull_request.user.url }}
+          GH_USER: ${{ github.event.pull_request.user.login }}
         run: |
           echo "Checking GH Event value"
-          echo "Github login: ${{ github.event.pull_request.user.login }}""
+          echo "Github login: $GH_USER"
+          echo "Github login url: $GH_USER_URL"
           echo "Github event: ${{ toJson(github.event) }}"
 
   # Publishing is done in a separate job to allow
