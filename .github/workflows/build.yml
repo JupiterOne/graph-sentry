@@ -67,12 +67,12 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           yarn
-          # npx auto shipit
-          echo "Setting version based on $VERSION"
+          npx auto changelog
+          echo "Setting version based on auto version:  $VERSION"
           echo "Using $GH_USER_EMAIL and $GH_USER for commits"
           git config user.email "$GH_USER_EMAIL"
           git config user.name "$GH_USER"
-          npm version $VERSION -m "Bump version to: %s [skip ci]"
+          npm version $VERSION -m "Bump version to: %s and automatically update CHANGELOG [auto]"
           git push --follow-tags
           yarn build
           npm publish ./dist
