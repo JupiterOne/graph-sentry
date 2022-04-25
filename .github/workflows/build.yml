@@ -64,11 +64,12 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
           yarn
-          echo "Setting version based on $VERSION"
-          npm version $VERSION -m "Bump version to: %s [skip ci]"
-          git push --follow-tags
-          yarn build
-          npm publish ./dist
+          npx auto shipit
+          # echo "Setting version based on $VERSION"
+          # npm version $VERSION -m "Bump version to: %s [skip ci]"
+          # git push --follow-tags
+          # yarn build
+          # npm publish ./dist
 
       - name: Get Version Changelog Entry
         if: env.publish == 'true'
