@@ -29,7 +29,7 @@ jobs:
 
       - name: Extra test
         run: |
-        echo "Github event: ${{ github.event }}""
+        echo "Github event: ${{ parseJSON(github.event) }}""
 
   # Publishing is done in a separate job to allow
   # for all matrix builds to complete.
