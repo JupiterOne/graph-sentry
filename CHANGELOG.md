@@ -1,3 +1,16 @@
+# v1.1.3 (Mon Apr 25 2022)
+
+#### 🐛 Bug Fix
+
+- Updating package name [#8](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/8) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Updating .env naming [#7](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/7) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### Authors: 1
+
+- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
+
+---
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
