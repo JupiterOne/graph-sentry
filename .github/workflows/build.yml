@@ -27,16 +27,6 @@ jobs:
       - name: Run build
         run: yarn build
 
-      - name: Extra test
-        env:
-          GH_USER_URL: ${{ github.event.pull_request.user.url }}
-          GH_USER: ${{ github.event.pull_request.user.login }}
-        run: |
-          echo "Checking GH Event value"
-          echo "Github login: $GH_USER"
-          echo "Github login url: $GH_USER_URL"
-          echo "Github event: ${{ toJson(github.event) }}"
-
   # Publishing is done in a separate job to allow
   # for all matrix builds to complete.
   release:
@@ -72,15 +62,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_USER_URL: ${{ github.event.pull_request.user.url }}
-          GH_USER: ${{ github.event.pull_request.user.login }}
+          GH_USER_EMAIL: ${{ github.event.commits[0].committer.email }}
+          GH_USER: ${{ github.event.commits[0].committer.name }}
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           yarn
           # npx auto shipit
           echo "Setting version based on $VERSION"
-          echo "Using $GH_USER_URL and $GH_USER for commits"
-          git config user.email "$GH_USER_URL"
+          echo "Using $GH_USER_EMAIL and $GH_USER for commits"
+          git config user.email "$GH_USER_EMAIL"
           git config user.name "$GH_USER"
           npm version $VERSION -m "Bump version to: %s [skip ci]"
           git push --follow-tags
