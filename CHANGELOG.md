@@ -1,3 +1,19 @@
+# v1.1.4 (Mon Apr 25 2022)
+
+#### 🐛 Bug Fix
+
+- Switching to just GITHUB_TOKEN [#16](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/16) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### ⚠️ Pushed to `main`
+
+- Bump version to: 1.2.0 and automatically update CHANGELOG [auto] ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### Authors: 1
+
+- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
+
+---
+
 # v1.2.0 (Mon Apr 25 2022)
 
 #### 🚀 Enhancement
