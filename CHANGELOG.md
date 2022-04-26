@@ -2,6 +2,22 @@
 
 #### 🚀 Enhancement
 
+- Updating README [#18](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/18) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### 🐛 Bug Fix
+
+- Testing NPM_AUTH_TOKEN [#19](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/19) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### Authors: 1
+
+- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
+
+---
+
+# v1.2.0 (Tue Apr 26 2022)
+
+#### 🚀 Enhancement
+
 - Only publish when release tag is included on PR [#17](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/17) ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### ⚠️ Pushed to `main`
