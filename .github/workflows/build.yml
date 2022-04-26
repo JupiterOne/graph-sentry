@@ -56,7 +56,7 @@ jobs:
           echo "VERSION=`echo $(npx auto version --only-publish-with-release-label)`" >> $GITHUB_ENV
 
       - name: Publish
-        if: VERSION !== null
+        if: env.VERSION !== null
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
