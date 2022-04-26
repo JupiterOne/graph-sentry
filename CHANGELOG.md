@@ -1,3 +1,19 @@
+# v1.2.0 (Tue Apr 26 2022)
+
+#### 🚀 Enhancement
+
+- Only publish when release tag is included on PR [#17](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/17) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### ⚠️ Pushed to `main`
+
+- Bump version to: 1.2.1 and automatically update CHANGELOG [auto] ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### Authors: 1
+
+- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
+
+---
+
 # v1.1.4 (Mon Apr 25 2022)
 
 #### 🐛 Bug Fix
