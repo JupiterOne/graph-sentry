@@ -70,10 +70,10 @@ jobs:
           echo "Using $GH_USER_EMAIL and $GH_USER for commits"
           git config user.email "$GH_USER_EMAIL"
           git config user.name "$GH_USER"
-          npm version $VERSION -m "Bump version to: %s and automatically update CHANGELOG [auto]"
+          yarn version --$VERSION --message "Bump version to: %s and automatically update CHANGELOG [auto]"
           git push --follow-tags
           yarn build
-          npm publish ./dist
+          yarn publish ./dist
           echo "publish=true" >> $GITHUB_ENV
 
       - name: Get Version Changelog Entry
