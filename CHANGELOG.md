@@ -1,12 +1,18 @@
 # v1.2.0 (Tue Apr 26 2022)
 
+# COnverting to Yarn
+
 #### 🚀 Enhancement
 
-- Updating README [#18](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/18) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Updating README
+  [#18](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/18)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### 🐛 Bug Fix
 
-- Testing NPM_AUTH_TOKEN [#19](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/19) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Testing NPM_AUTH_TOKEN
+  [#19](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/19)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### Authors: 1
 
@@ -18,11 +24,14 @@
 
 #### 🚀 Enhancement
 
-- Only publish when release tag is included on PR [#17](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/17) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Only publish when release tag is included on PR
+  [#17](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/17)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### ⚠️ Pushed to `main`
 
-- Bump version to: 1.2.1 and automatically update CHANGELOG [auto] ([@adam-in-ict](https://github.com/adam-in-ict))
+- Bump version to: 1.2.1 and automatically update CHANGELOG
+  [auto](<[@adam-in-ict](https://github.com/adam-in-ict)>)
 
 #### Authors: 1
 
@@ -34,11 +43,14 @@
 
 #### 🐛 Bug Fix
 
-- Switching to just GITHUB_TOKEN [#16](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/16) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Switching to just GITHUB_TOKEN
+  [#16](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/16)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### ⚠️ Pushed to `main`
 
-- Bump version to: 1.2.0 and automatically update CHANGELOG [auto] ([@adam-in-ict](https://github.com/adam-in-ict))
+- Bump version to: 1.2.0 and automatically update CHANGELOG
+  [auto](<[@adam-in-ict](https://github.com/adam-in-ict)>)
 
 #### Authors: 1
 
@@ -50,11 +62,14 @@
 
 #### 🚀 Enhancement
 
-- Including CHANGELOG in NPM package. [#15](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/15) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Including CHANGELOG in NPM package.
+  [#15](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/15)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### ⚠️ Pushed to `main`
 
-- Bump version to: 1.1.5 and automatically update CHANGELOG [auto] ([@adam-in-ict](https://github.com/adam-in-ict))
+- Bump version to: 1.1.5 and automatically update CHANGELOG
+  [auto](<[@adam-in-ict](https://github.com/adam-in-ict)>)
 
 #### Authors: 1
 
@@ -66,7 +81,9 @@
 
 #### 🐛 Bug Fix
 
-- Adding in changelog update. [#14](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/14) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Adding in changelog update.
+  [#14](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/14)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### Authors: 1
 
@@ -78,8 +95,12 @@
 
 #### 🐛 Bug Fix
 
-- Updating package name [#8](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/8) ([@adam-in-ict](https://github.com/adam-in-ict))
-- Updating .env naming [#7](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/7) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Updating package name
+  [#8](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/8)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
+- Updating .env naming
+  [#7](https://github.com/adam-in-ict/graph-sentry-adam-in-ict-testing/pull/7)
+  ([@adam-in-ict](https://github.com/adam-in-ict))
 
 #### Authors: 1
 
