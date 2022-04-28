@@ -1,4 +1,4 @@
-TESTING ONLY. DO NOT USE.
+TESTING ONLY. DO NOT USE. Use graph-sentry from @jupiterone instead.
 
 # JupiterOne Integration
 
