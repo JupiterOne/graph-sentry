@@ -1,13 +1,37 @@
 name: build
 
 on:
+  pull_request:
   push:
     branches:
       - main
 
 jobs:
-  BuildRelease:
+  test:
     runs-on: ubuntu-latest
+    steps:
+      - id: setup-node
+        name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Check out code repository source code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run tests
+        run: yarn test:ci
+
+      - name: Run build
+        run: yarn build
+
+  BuildRelease:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     name: Checkout Code
     steps:
       - name: Setup Node
