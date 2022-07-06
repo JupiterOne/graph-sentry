@@ -47,5 +47,5 @@ jobs:
       - name: Build and Release
         uses: jupiterone/action-npm-build-release@v1
         with:
-          npm_auth_token: ${{ secrets.NPM_AUTH_TOKEN_TEST }}
+          npm_auth_token: ${{ secrets.NPM_AUTH_TOKEN }}
           gh_token: ${{ secrets.AUTO_GITHUB_PAT_TOKEN }}
