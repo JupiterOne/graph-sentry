@@ -1,3 +1,16 @@
+# v1.2.0 (Wed Jul 06 2022)
+
+#### 🚀 Enhancement
+
+- Add .npmrc to .gitignore to fix auto error. [#43](https://github.com/JupiterOne/graph-sentry/pull/43) ([@adam-in-ict](https://github.com/adam-in-ict))
+- Fixing NPM secret used by custom action [#42](https://github.com/JupiterOne/graph-sentry/pull/42) ([@adam-in-ict](https://github.com/adam-in-ict))
+
+#### Authors: 1
+
+- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
+
+---
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
