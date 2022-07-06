@@ -42,8 +42,16 @@
   },
   "auto": {
     "plugins": [
-      "npm"
+      [
+        "npm", 
+        {
+          "publishFolder": "./dist"
+        }
+      ]
     ],
-    "onlyPublishWithReleaseLabel": true
+    "onlyPublishWithReleaseLabel": true,
+    "shipit": {
+      "noChangelog": true
+    }
   }
 }
