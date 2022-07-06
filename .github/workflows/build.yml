@@ -1,4 +1,4 @@
-name: Build
+name: build
 on:
   pull_request:
   push:
@@ -29,69 +29,23 @@ jobs:
 
   # Publishing is done in a separate job to allow
   # for all matrix builds to complete.
-  release:
+  BuildRelease:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    name: Checkout Code
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-
       - name: Check out repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
-
-      # Fetch tags and describe the commit before the merge commit
-      # to see if it's a version publish
-      - name: Auto version check
-        env:
-          GITHUB_TOKEN: ${{ secrets.AUTO_GITHUB_PAT_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: |
-          yarn
-          git fetch --tags
-          echo "VERSION=`echo $(npx auto version --only-publish-with-release-label)`" >> $GITHUB_ENV
-      - name: Publish
-        if: env.VERSION != null
-        env:
-          GITHUB_TOKEN: ${{ secrets.AUTO_GITHUB_PAT_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          GH_USER_EMAIL: ${{ github.event.commits[0].committer.email }}
-          GH_USER: ${{ github.event.commits[0].committer.name }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
-          yarn
-          echo "Setting version based on auto version:  $VERSION"
-          git config user.email "internal-automation.bot@jupiterone.com"
-          git config user.name "j1-internal-automation"
-          npm version $VERSION -m "Bump version to: %s [auto]"
-          git push --follow-tags
-          yarn build
-          npm publish ./dist
-          echo "publish=true" >> $GITHUB_ENV
-      - name: Get Version Changelog Entry
-        if: env.publish == 'true'
-        id: changelog_reader
-        uses: mindsers/changelog-reader-action@v2
+          token: ${{ secrets.AUTO_GITHUB_PAT_TOKEN }}
+      - name: Build and Release
+        uses: jupiterone/action-npm-build-release@v1
         with:
-          version: ${{ env.VERSION_NUM }}
-          path: ./CHANGELOG.md
-        continue-on-error: true
-
-      - name: Create Release
-        if: env.publish == 'true'
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.AUTO_GITHUB_PAT_TOKEN }}
-        with:
-          tag_name: ${{ steps.changelog_reader.outputs.version }}
-          release_name: Release ${{ steps.changelog_reader.outputs.version }}
-          body: ${{ steps.changelog_reader.outputs.changes }}
-          prerelease:
-            ${{ steps.changelog_reader.outputs.status == 'prereleased' }}
-          draft: ${{ steps.changelog_reader.outputs.status == 'unreleased' }}
-        continue-on-error: true
+          npm_auth_token: ${{ secrets.NPM_AUTH_TOKEN_TEST }}
+          gh_token: ${{ secrets.AUTO_GITHUB_PAT_TOKEN }}
