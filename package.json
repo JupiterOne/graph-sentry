@@ -51,7 +51,6 @@
       ],
       "released"
     ],
-    "onlyPublishWithReleaseLabel": true,
     "shipit": {
       "noChangelog": true,
       "onlyGraduateWithReleaseLabel": true
