@@ -53,7 +53,8 @@
     ],
     "onlyPublishWithReleaseLabel": true,
     "shipit": {
-      "noChangelog": true
+      "noChangelog": true,
+      "onlyGraduateWithReleaseLabel": true
     }
   }
 }
