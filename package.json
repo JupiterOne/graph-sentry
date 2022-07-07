@@ -52,8 +52,7 @@
       "released"
     ],
     "shipit": {
-      "noChangelog": true,
-      "onlyGraduateWithReleaseLabel": true
+      "noChangelog": true
     }
   }
 }
