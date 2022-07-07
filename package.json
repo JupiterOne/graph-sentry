@@ -27,7 +27,8 @@
     "test:env": "LOAD_ENV=1 yarn test",
     "test:ci": "yarn lint && yarn type-check && yarn test",
     "build": "tsc -p tsconfig.dist.json --declaration && cp README.md dist/README.md && cp -r jupiterone/ dist/jupiterone/",
-    "prepush": "yarn lint && yarn type-check && jest --changedSince main"
+    "prepush": "yarn lint && yarn type-check && jest --changedSince main",
+    "prepack": "cp package.json dist/package.json"
   },
   "peerDependencies": {
     "@jupiterone/integration-sdk-core": "^8.8.0"
@@ -46,7 +47,8 @@
       [
         "npm",
         {
-          "setRcToken": false
+          "setRcToken": false,
+          "publishFolder": "./dist"
         }
       ],
       "released"
