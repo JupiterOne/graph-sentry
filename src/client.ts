@@ -97,7 +97,7 @@ export class APIClient {
   }
 
   /**
-   * Iterates each group resource in the provider.
+   * Iterates each project resource in the provider.
    *
    * @param orgSlug added to URL to specify correct Sentry organization
    * @param iteratee receives each resource to produce entities/relationships
