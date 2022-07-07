@@ -48,8 +48,12 @@
           "setRcToken": false,
           "publishFolder": "./dist"
         }
-      ]
+      ],
+      "released"
     ],
-    "onlyPublishWithReleaseLabel": true
+    "onlyPublishWithReleaseLabel": true,
+    "shipit": {
+      "noChangelog": true
+    }
   }
 }

@@ -1,16 +1,3 @@
-# v1.2.1 (Thu Jul 07 2022)
-
-#### 🐛 Bug Fix
-
-- Temporarily updating to match Cameron's auto config. [#48](https://github.com/JupiterOne/graph-sentry/pull/48) ([@adam-in-ict](https://github.com/adam-in-ict))
-- Updating inline comment for project iterator - testing auto [#47](https://github.com/JupiterOne/graph-sentry/pull/47) ([@adam-in-ict](https://github.com/adam-in-ict))
-
-#### Authors: 1
-
-- Adam Pierson ([@adam-in-ict](https://github.com/adam-in-ict))
-
----
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -21,7 +8,7 @@ and this project adheres to
 
 ## [Unreleased]
 
-## 1.3.0 - 2022-07-07
+## 1.2.2 - 2022-07-07
 
 ### Fixed
 
