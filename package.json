@@ -43,15 +43,12 @@
   "auto": {
     "plugins": [
       [
-        "npm", 
+        "npm",
         {
-          "publishFolder": "./dist"
+          "setRcToken": false
         }
-      ]
-    ],
-    "onlyPublishWithReleaseLabel": true,
-    "shipit": {
-      "noChangelog": true
-    }
+      ],
+      "released"
+    ]
   }
 }
