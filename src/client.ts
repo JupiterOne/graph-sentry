@@ -149,7 +149,7 @@ export class APIClient {
   }
 
   /**
-   * Iterates each group resource in the provider.
+   * Iterates each team resource in the provider.
    *
    * @param orgSlug added to URL to specify correct Sentry organization
    * @param teamSlug added to URL to specify correct Sentry team
