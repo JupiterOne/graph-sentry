@@ -50,9 +50,6 @@
         }
       ]
     ],
-    "onlyPublishWithReleaseLabel": true,
-    "shipit": {
-      "noChangelog": true
-    }
+    "onlyPublishWithReleaseLabel": true
   }
 }
