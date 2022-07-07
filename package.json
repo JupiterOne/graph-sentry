@@ -53,7 +53,8 @@
       "released"
     ],
     "shipit": {
-      "noChangelog": true
+      "noChangelog": true,
+      "prerelease": false
     }
   }
 }
