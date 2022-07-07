@@ -1,6 +1,7 @@
 {
   "name": "@jupiterone/graph-sentry",
   "version": "1.2.1",
+  "repository": "@jupiterone/graph-sentry",
   "description": "JupiterOne integration for ingesting data from Sentry.io",
   "license": "MPL-2.0",
   "main": "src/index.js",
