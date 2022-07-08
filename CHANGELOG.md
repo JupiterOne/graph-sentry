@@ -8,7 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
-## 1.2.2 - 2022-07-07
+## 1.3.1 - 2022-07-08
+
+### Fixed
+
+- Added postversion script to fix final issue with `auto` versioning.
+
+## 1.3.0 - 2022-07-07
 
 ### Fixed
 
