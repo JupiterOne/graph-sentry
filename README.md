@@ -31,6 +31,7 @@ with JupiterOne in the [integration documentation](docs/jupiterone.md).
    another way. `.gitignore` is configured to to avoid commiting the `.env`
    file.
 
+
 ### Running the integration
 
 1. `yarn start` to collect data
