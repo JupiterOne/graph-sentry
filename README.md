@@ -32,6 +32,7 @@ with JupiterOne in the [integration documentation](docs/jupiterone.md).
    file.
 
 
+
 ### Running the integration
 
 1. `yarn start` to collect data
