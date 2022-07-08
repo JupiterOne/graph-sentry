@@ -1,8 +1,8 @@
 {
-  "name": "@jupiterone/graph-sentry",
+  "name": "testing-graph-sentry",
   "version": "1.3.0",
-  "repository": "@jupiterone/graph-sentry",
-  "description": "JupiterOne integration for ingesting data from Sentry.io",
+  "repository": "@adam-in-ict/testing-graph-sentry",
+  "description": "TESTING ONLY. DO NOT USE",
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
