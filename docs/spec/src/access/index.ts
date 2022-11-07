@@ -23,8 +23,14 @@ export const accessSpec: StepSpec<IntegrationConfig>[] = [
         _class: RelationshipClass.HAS,
         targetType: 'sentry_member',
       },
+      {
+        _class: RelationshipClass.ASSIGNED,
+        _type: 'sentry_member_assigned_role',
+        sourceType: 'sentry_member',
+        targetType: 'sentry_role',
+      },
     ],
-    dependsOn: ['fetch-organization'],
+    dependsOn: ['fetch-organization', 'fetch-roles'],
     implemented: true,
   },
   {

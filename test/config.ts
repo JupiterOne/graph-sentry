@@ -8,7 +8,7 @@ if (process.env.LOAD_ENV) {
   });
 }
 const DEFAULT_AUTH_TOKEN = 'dummy-bearer-token';
-const DEFAULT_ORGANIZATION_SLUG = 'jupiterone-integration-develop';
+const DEFAULT_ORGANIZATION_SLUG = 'creativice';
 
 export const integrationConfig: IntegrationConfig = {
   authToken: process.env.AUTH_TOKEN || DEFAULT_AUTH_TOKEN,

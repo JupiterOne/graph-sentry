@@ -92,24 +92,41 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources    | Entity `_type`        | Entity `_class` |
-| ------------ | --------------------- | --------------- |
-| Member       | `sentry_member`       | `User`          |
-| Organization | `sentry_organization` | `Account`       |
-| Project      | `sentry_project`      | `Project`       |
-| Team         | `sentry_team`         | `UserGroup`     |
+| Resources            | Entity `_type`         | Entity `_class` |
+| -------------------- | ---------------------- | --------------- |
+| Finding              | `sentry_finding`       | `Finding`       |
+| Member               | `sentry_member`        | `User`          |
+| Organization         | `sentry_organization`  | `Account`       |
+| Project              | `sentry_project`       | `Project`       |
+| Role                 | `sentry_role`          | `AccessRole`    |
+| Service              | `sentry_service`       | `Service`       |
+| Source Vulnerability | `sentry_vulnerability` | `Vulnerability` |
+| Team                 | `sentry_team`          | `UserGroup`     |
 
 ### Relationships
 
 The following relationships are created:
 
-| Source Entity `_type` | Relationship `_class` | Target Entity `_type` |
-| --------------------- | --------------------- | --------------------- |
-| `sentry_organization` | **HAS**               | `sentry_member`       |
-| `sentry_organization` | **HAS**               | `sentry_project`      |
-| `sentry_organization` | **HAS**               | `sentry_team`         |
-| `sentry_team`         | **ASSIGNED**          | `sentry_project`      |
-| `sentry_team`         | **HAS**               | `sentry_member`       |
+| Source Entity `_type` | Relationship `_class` | Target Entity `_type`  |
+| --------------------- | --------------------- | ---------------------- |
+| `sentry_finding`      | **EXPLOITS**          | `sentry_vulnerability` |
+| `sentry_member`       | **ASSIGNED**          | `sentry_role`          |
+| `sentry_organization` | **HAS**               | `sentry_member`        |
+| `sentry_organization` | **HAS**               | `sentry_project`       |
+| `sentry_organization` | **HAS**               | `sentry_role`          |
+| `sentry_organization` | **HAS**               | `sentry_service`       |
+| `sentry_organization` | **HAS**               | `sentry_team`          |
+| `sentry_project`      | **HAS**               | `sentry_finding`       |
+| `sentry_team`         | **ASSIGNED**          | `sentry_project`       |
+| `sentry_team`         | **HAS**               | `sentry_member`        |
+
+### Mapped Relationships
+
+The following mapped relationships are created:
+
+| Source Entity `_type` | Relationship `_class` | Target Entity `_type` | Direction |
+| --------------------- | --------------------- | --------------------- | --------- |
+| `sentry_organization` | **HAS**               | `*repository*`        | FORWARD   |
 
 <!--
 ********************************************************************************

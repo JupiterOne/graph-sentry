@@ -1,13 +1,16 @@
 import {
+  createDirectRelationship,
   getRawData,
   IntegrationStep,
   IntegrationStepExecutionContext,
+  RelationshipClass,
 } from '@jupiterone/integration-sdk-core';
 
 import { createAPIClient } from '../../client';
 import { IntegrationConfig } from '../../config';
 import { SentryTeam } from '../../types';
 import { Entities, Steps, Relationships } from '../constants';
+import { getRoleKey } from '../roles/converter';
 import {
   createSentryProjectEntity,
   createSentryProjectRelationship,
@@ -68,7 +71,7 @@ export async function fetchTeams({
 }
 
 export async function fetchTeamsAssignments({
-  instance,
+  logger,
   jobState,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
   await jobState.iterateEntities(
@@ -76,19 +79,25 @@ export async function fetchTeamsAssignments({
     async (teamEntity) => {
       // Do the following in a subsequent call to get data to add relationships.
       const teamData = getRawData<SentryTeam>(teamEntity);
-      if (teamData) {
-        for (const project of teamData.projects) {
-          const projectEntity = await jobState.findEntity(
-            `sentry-project-${project.id}`,
+      if (!teamData) {
+        logger.warn(
+          { _key: teamEntity._key },
+          'Could not get raw data for team entity',
+        );
+        return;
+      }
+
+      for (const project of teamData.projects) {
+        const projectEntity = await jobState.findEntity(
+          `sentry-project-${project.id}`,
+        );
+        if (projectEntity) {
+          await jobState.addRelationship(
+            createSentryTeamAssignedProjectRelationship(
+              teamEntity,
+              projectEntity,
+            ),
           );
-          if (projectEntity) {
-            await jobState.addRelationship(
-              createSentryTeamAssignedProjectRelationship(
-                teamEntity,
-                projectEntity,
-              ),
-            );
-          }
         }
       }
     },
@@ -112,6 +121,19 @@ export async function fetchUsers({
           await jobState.addRelationship(
             createSentryUserRelationship(organization, userEntity),
           );
+
+          const roleEntity = await jobState.findEntity(
+            getRoleKey(userData.role),
+          );
+
+          if (roleEntity)
+            await jobState.addRelationship(
+              createDirectRelationship({
+                _class: RelationshipClass.ASSIGNED,
+                from: userEntity,
+                to: roleEntity,
+              }),
+            );
         });
       }
     },
@@ -179,8 +201,11 @@ export const accessSteps: IntegrationStep<IntegrationConfig>[] = [
     id: Steps.USERS,
     name: 'Fetch Members',
     entities: [Entities.MEMBER],
-    relationships: [Relationships.ORGANIZATION_HAS_USER],
-    dependsOn: [Steps.ORGANIZATIONS],
+    relationships: [
+      Relationships.ORGANIZATION_HAS_USER,
+      Relationships.MEMBER_ASSIGNED_ROLE,
+    ],
+    dependsOn: [Steps.ORGANIZATIONS, Steps.ROLES],
     executionHandler: fetchUsers,
   },
   {

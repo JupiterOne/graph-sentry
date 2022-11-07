@@ -11,6 +11,10 @@ import {
 } from './access';
 import { integrationConfig } from '../../test/config';
 import { Recording, setupSentryRecording } from '../../test/recording';
+import { fetchService } from './service';
+import { fetchRoles } from './roles';
+import { buildOrgRepoRelationship } from './repository';
+import { fetchProjectIssues } from './issue';
 
 let recording: Recording;
 
@@ -32,12 +36,16 @@ test('should collect data', async () => {
 
   // Simulates dependency graph execution.
   // See https://github.com/JupiterOne/sdk/issues/262.
+  await fetchService(context);
   await fetchOrganizations(context);
-  await fetchProjects(context);
   await fetchTeams(context);
+  await fetchProjects(context);
   await fetchTeamsAssignments(context);
+  await fetchRoles(context);
   await fetchUsers(context);
   await fetchUserAssignments(context);
+  await buildOrgRepoRelationship(context);
+  await fetchProjectIssues(context);
 
   // Review snapshot, failure is a regression
   expect({

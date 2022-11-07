@@ -8,6 +8,33 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added new entities
+
+  | Resources            | Entity `_type`         | Entity `_class` |
+  | -------------------- | ---------------------- | --------------- |
+  | Service              | `sentry_service`       | `Service`       |
+  | Role                 | `sentry_role`          | `AccessRole`    |
+  | Finding              | `sentry_finding`       | `Finding`       |
+  | Source Vulnerability | `sentry_vulnerability` | `Vulnerability` |
+
+- Added new relationships
+
+  | Source Entity `_type` | Relationship `_class` | Target Entity `_type`  |
+  | --------------------- | --------------------- | ---------------------- |
+  | `sentry_member`       | **ASSIGNED**          | `sentry_role`          |
+  | `sentry_organization` | **HAS**               | `sentry_role`          |
+  | `sentry_organization` | **HAS**               | `sentry_service`       |
+  | `sentry_project`      | **HAS**               | `sentry_finding`       |
+  | `sentry_finding`      | **EXPLOITS**          | `sentry_vulnerability` |
+
+- Added new mapped relationship
+
+  | Source Entity `_type` | Relationship `_class` | Target Entity `_type` | Direction |
+  | --------------------- | --------------------- | --------------------- | --------- |
+  | `sentry_organization` | **HAS**               | `*repository*`        | FORWARD   |
+
 ## 1.3.1 - 2022-07-08
 
 ### Fixed
