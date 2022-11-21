@@ -27,7 +27,6 @@ export const Entities: Record<
   | 'PROJECT'
   | 'MEMBER'
   | 'SERVICE'
-  | 'VULNERABILITY'
   | 'ROLE'
   | 'FINDING',
   StepEntityMetadata
@@ -67,11 +66,6 @@ export const Entities: Record<
     _type: 'sentry_finding',
     _class: ['Finding'],
   },
-  VULNERABILITY: {
-    resourceName: 'Source Vulnerability',
-    _type: 'sentry_vulnerability',
-    _class: ['Vulnerability'],
-  },
 };
 
 export const MappedRelationships: Record<
@@ -103,7 +97,6 @@ export const Relationships: Record<
   | 'MEMBER_ASSIGNED_ROLE'
   | 'ORGANIZATION_HAS_ROLE'
   | 'PROJECT_HAS_FINDING'
-  | 'FINDING_EXPLOITS_VULNERABILITY'
   | 'TEAM_HAS_USER',
   StepRelationshipMetadata
 > = {
@@ -160,11 +153,5 @@ export const Relationships: Record<
     sourceType: Entities.PROJECT._type,
     _class: RelationshipClass.HAS,
     targetType: Entities.FINDING._type,
-  },
-  FINDING_EXPLOITS_VULNERABILITY: {
-    _type: 'sentry_finding_exploits_vulnerability',
-    sourceType: Entities.FINDING._type,
-    _class: RelationshipClass.EXPLOITS,
-    targetType: Entities.VULNERABILITY._type,
   },
 };

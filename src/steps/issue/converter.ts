@@ -39,34 +39,10 @@ export function createFindingEntity(issue: SentryIssue): Entity {
         firstSeenOn: parseTimePropertyValue(issue.firstSeen),
         lastSeenOn: parseTimePropertyValue(issue.lastSeen),
         category: 'application',
-        // TODO: not entirely sure how to map this based on the response
-        severity: issue.level,
-        // TODO: not entirely sure how to map this based on the response
-        numericSeverity: issue.level === 'error' ? 8 : 4,
+        severity: 'unknown',
+        numericSeverity: 0,
         open: issue.status === 'unresolved',
         public: issue.isPublic,
-      },
-    },
-  });
-}
-
-export function createSourceVulnerabilityEntity(issue: SentryIssue): Entity {
-  return createIntegrationEntity({
-    entityData: {
-      source: issue,
-      assign: {
-        _key: `sentry-vulnerability:${issue.id}`,
-        _type: Entities.VULNERABILITY._type,
-        _class: Entities.VULNERABILITY._class,
-        name: issue.id,
-        title: issue.title,
-        category: 'application',
-        // TODO: not entirely sure how to map this based on the response
-        severity: issue.level,
-        blocking: false,
-        public: issue.isPublic,
-        open: issue.status === 'unresolved',
-        production: true,
       },
     },
   });

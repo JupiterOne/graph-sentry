@@ -16,11 +16,6 @@ export const issueSpec: StepSpec<IntegrationConfig>[] = [
         _type: 'sentry_finding',
         _class: ['Finding'],
       },
-      {
-        resourceName: 'Source Vulnerability',
-        _type: 'sentry_vulnerability',
-        _class: ['Vulnerability'],
-      },
     ],
     relationships: [
       {
@@ -28,12 +23,6 @@ export const issueSpec: StepSpec<IntegrationConfig>[] = [
         sourceType: 'sentry_project',
         _class: RelationshipClass.HAS,
         targetType: 'sentry_finding',
-      },
-      {
-        _type: 'sentry_finding_exploits_vulnerability',
-        sourceType: 'sentry_finding',
-        _class: RelationshipClass.EXPLOITS,
-        targetType: 'sentry_vulnerability',
       },
     ],
     dependsOn: ['fetch-projects'],

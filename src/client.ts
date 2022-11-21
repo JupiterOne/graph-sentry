@@ -71,7 +71,7 @@ export class APIClient {
   }
 
   /**
-   * Iterates each group resource in the provider.
+   * Iterates each organization repository resource in the provider.
    *
    * @param iteratee receives each resource to produce entities/relationships
    */
@@ -79,12 +79,18 @@ export class APIClient {
     iteratee: ResourceIteratee<SentryOrganizationRepository>,
   ): Promise<void> {
     const url = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/repos/`;
+    let moreData = true;
 
-    const repoResponse = await this.axiosInstance.get(url);
-    const repoResults = repoResponse.data;
+    while (moreData) {
+      const orgRepoResponse = await this.axiosInstance.get(url);
+      const orgRepoResults = orgRepoResponse.data;
 
-    for (const repo of repoResults) {
-      await iteratee(repo);
+      const orgRepoHeaders = orgRepoResponse.headers;
+      moreData = Boolean(orgRepoHeaders.results); //results=true when more than 100 results are available
+
+      for (const orgRepo of orgRepoResults) {
+        await iteratee(orgRepo);
+      }
     }
   }
 
@@ -141,7 +147,7 @@ export class APIClient {
   }
 
   /**
-   * Iterates each project resource in the provider.
+   * Iterates each project issue resource in the provider.
    *
    * @param projectSlug added to URL to specify correct Sentry prokect
    * @param iteratee receives each resource to produce entities/relationships

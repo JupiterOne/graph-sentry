@@ -10,10 +10,7 @@ import { createAPIClient } from '../../client';
 import { IntegrationConfig } from '../../config';
 import { SentryProject } from '../../types';
 import { Entities, Relationships, Steps } from '../constants';
-import {
-  createFindingEntity,
-  createSourceVulnerabilityEntity,
-} from './converter';
+import { createFindingEntity } from './converter';
 
 export async function fetchProjectIssues({
   jobState,
@@ -40,20 +37,11 @@ export async function fetchProjectIssues({
           createFindingEntity(issue),
         );
 
-        const sourceVulnerabilityEntity = await jobState.addEntity(
-          createSourceVulnerabilityEntity(issue),
-        );
-
         await jobState.addRelationships([
           createDirectRelationship({
             _class: RelationshipClass.HAS,
             from: projectEntity,
             to: findingEntity,
-          }),
-          createDirectRelationship({
-            _class: RelationshipClass.EXPLOITS,
-            from: findingEntity,
-            to: sourceVulnerabilityEntity,
           }),
         ]);
       });
@@ -65,11 +53,8 @@ export const findingSteps: IntegrationStep<IntegrationConfig>[] = [
   {
     id: Steps.ISSUES,
     name: 'Fetch Project Issues',
-    entities: [Entities.FINDING, Entities.VULNERABILITY],
-    relationships: [
-      Relationships.PROJECT_HAS_FINDING,
-      Relationships.FINDING_EXPLOITS_VULNERABILITY,
-    ],
+    entities: [Entities.FINDING],
+    relationships: [Relationships.PROJECT_HAS_FINDING],
     dependsOn: [Steps.PROJECTS],
     executionHandler: fetchProjectIssues,
   },
