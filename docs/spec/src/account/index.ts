@@ -1,4 +1,4 @@
-import { StepSpec } from '@jupiterone/integration-sdk-core';
+import { RelationshipClass, StepSpec } from '@jupiterone/integration-sdk-core';
 import { IntegrationConfig } from '../../../../src/config';
 
 export const accountSpec: StepSpec<IntegrationConfig>[] = [
@@ -16,8 +16,15 @@ export const accountSpec: StepSpec<IntegrationConfig>[] = [
         _class: ['Account'],
       },
     ],
-    relationships: [],
-    dependsOn: [],
+    relationships: [
+      {
+        _class: RelationshipClass.HAS,
+        _type: 'sentry_organization_has_service',
+        sourceType: 'sentry_organization',
+        targetType: 'sentry_service',
+      },
+    ],
+    dependsOn: ['fetch-service'],
     implemented: true,
   },
 ];

@@ -8,6 +8,8 @@ import {
   SentryTeam,
   SentryProject,
   SentryUser,
+  SentryOrganizationRepository,
+  SentryIssue,
 } from './types';
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
@@ -60,14 +62,36 @@ export class APIClient {
   public async iterateOrganizations(
     iteratee: ResourceIteratee<SentryOrganization>,
   ): Promise<void> {
-    let url = this.sentryBaseUrl + 'organizations/';
-
-    url += `${this.sentryOrganization}/`;
+    const url = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/`;
 
     const orgResponse = await this.axiosInstance.get(url);
     const orgResults = orgResponse.data;
 
     await iteratee(orgResults);
+  }
+
+  /**
+   * Iterates each organization repository resource in the provider.
+   *
+   * @param iteratee receives each resource to produce entities/relationships
+   */
+  public async iterateOrganizationRepositories(
+    iteratee: ResourceIteratee<SentryOrganizationRepository>,
+  ): Promise<void> {
+    const url = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/repos/`;
+    let moreData = true;
+
+    while (moreData) {
+      const orgRepoResponse = await this.axiosInstance.get(url);
+      const orgRepoResults = orgRepoResponse.data;
+
+      const orgRepoHeaders = orgRepoResponse.headers;
+      moreData = Boolean(orgRepoHeaders.results); //results=true when more than 100 results are available
+
+      for (const orgRepo of orgRepoResults) {
+        await iteratee(orgRepo);
+      }
+    }
   }
 
   /**
@@ -118,6 +142,32 @@ export class APIClient {
 
       for (const project of projectResults) {
         await iteratee(project);
+      }
+    }
+  }
+
+  /**
+   * Iterates each project issue resource in the provider.
+   *
+   * @param projectSlug added to URL to specify correct Sentry prokect
+   * @param iteratee receives each resource to produce entities/relationships
+   */
+  public async iterateProjectIssues(
+    projectSlug: string,
+    iteratee: ResourceIteratee<SentryIssue>,
+  ): Promise<void> {
+    const url = `${this.sentryBaseUrl}projects/${this.sentryOrganization}/${projectSlug}/issues/`;
+    let moreData = true;
+
+    while (moreData) {
+      const projectIssueResponse = await this.axiosInstance.get(url);
+      const projectIssueResults = projectIssueResponse.data;
+
+      const projectIssueHeaders = projectIssueResponse.headers;
+      moreData = Boolean(projectIssueHeaders.results); //results=true when more than 100 results are available
+
+      for (const projectIssue of projectIssueResults) {
+        await iteratee(projectIssue);
       }
     }
   }
