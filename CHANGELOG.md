@@ -12,7 +12,7 @@ and this project adheres to
 
 ### Added
 
-- Added new entities
+- The following entities are **now** being ingested
 
   | Resources            | Entity `_type`         | Entity `_class` |
   | -------------------- | ---------------------- | --------------- |
