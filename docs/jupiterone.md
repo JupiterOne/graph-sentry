@@ -36,7 +36,7 @@ If you need help with this integration, please contact
 
 [Sentry API Documentation](https://docs.sentry.io/api/auth/)
 
-[Generate am Auth Token](https://sentry.io/settings/account/api/auth-tokens/)
+[Generate an Auth Token](https://sentry.io/settings/account/api/auth-tokens/)
 
 1. Navigate to the Auth Tokens page in Sentry Settings.
 2. Select **Create New Token** in the top right corner.
