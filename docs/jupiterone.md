@@ -23,6 +23,7 @@
   - `org:read`
   - `project:read`
   - `team:read`
+  - `event:read`
 - You must have permission in JupiterOne to install new integrations.
 
 ## Support
@@ -40,8 +41,8 @@ If you need help with this integration, please contact
 
 1. Navigate to the Auth Tokens page in Sentry Settings.
 2. Select **Create New Token** in the top right corner.
-3. Select `project:read`, `team:read`, `org:read`, and `member:read` and then
-   click **Create Token**.
+3. Select `project:read`, `team:read`, `org:read`, `event:read`, and
+   `member:read` and then click **Create Token**.
 
 ### In JupiterOne
 
