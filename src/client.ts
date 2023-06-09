@@ -1,5 +1,5 @@
 import Axios, * as axios from 'axios';
-
+import parse from 'parse-link-header';
 import { IntegrationProviderAuthenticationError } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from './config';
@@ -78,16 +78,14 @@ export class APIClient {
   public async iterateOrganizationRepositories(
     iteratee: ResourceIteratee<SentryOrganizationRepository>,
   ): Promise<void> {
-    const url = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/repos/`;
-    let moreData = true;
+    let url = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/repos/`;
 
-    while (moreData) {
+    while (url) {
       const orgRepoResponse = await this.axiosInstance.get(url);
       const orgRepoResults = orgRepoResponse.data;
 
       const orgRepoHeaders = orgRepoResponse.headers;
-      moreData = Boolean(orgRepoHeaders.results); //results=true when more than 100 results are available
-
+      url = this.getNextUrl(orgRepoHeaders.link);
       for (const orgRepo of orgRepoResults) {
         await iteratee(orgRepo);
       }
@@ -104,15 +102,14 @@ export class APIClient {
     organizationSlug: string,
     iteratee: ResourceIteratee<SentryTeam>,
   ): Promise<void> {
-    const url = `${this.sentryBaseUrl}organizations/${organizationSlug}/teams/`;
-    let moreData = true;
+    let url = `${this.sentryBaseUrl}organizations/${organizationSlug}/teams/`;
 
-    while (moreData) {
+    while (url) {
       const teamResponse = await this.axiosInstance.get(url);
       const teamResults = teamResponse.data;
 
       const teamHeaders = teamResponse.headers;
-      moreData = Boolean(teamHeaders.results); //results=true when more than 100 results are available
+      url = this.getNextUrl(teamHeaders.link); //results=true when more than 100 results are available
 
       for (const team of teamResults) {
         await iteratee(team);
@@ -130,15 +127,14 @@ export class APIClient {
     organizationSlug: string,
     iteratee: ResourceIteratee<SentryProject>,
   ): Promise<void> {
-    const url = `${this.sentryBaseUrl}organizations/${organizationSlug}/projects/`;
-    let moreData = true;
+    let url = `${this.sentryBaseUrl}organizations/${organizationSlug}/projects/`;
 
-    while (moreData) {
+    while (url) {
       const projectResponse = await this.axiosInstance.get(url);
       const projectResults = projectResponse.data;
 
       const projectHeaders = projectResponse.headers;
-      moreData = Boolean(projectHeaders.results); //results=true when more than 100 results are available
+      url = this.getNextUrl(projectHeaders.link); //results=true when more than 100 results are available
 
       for (const project of projectResults) {
         await iteratee(project);
@@ -156,15 +152,14 @@ export class APIClient {
     projectSlug: string,
     iteratee: ResourceIteratee<SentryIssue>,
   ): Promise<void> {
-    const url = `${this.sentryBaseUrl}projects/${this.sentryOrganization}/${projectSlug}/issues/`;
-    let moreData = true;
+    let url = `${this.sentryBaseUrl}projects/${this.sentryOrganization}/${projectSlug}/issues/`;
 
-    while (moreData) {
+    while (url) {
       const projectIssueResponse = await this.axiosInstance.get(url);
       const projectIssueResults = projectIssueResponse.data;
 
       const projectIssueHeaders = projectIssueResponse.headers;
-      moreData = Boolean(projectIssueHeaders.results); //results=true when more than 100 results are available
+      url = this.getNextUrl(projectIssueHeaders.link); //results=true when more than 100 results are available
 
       for (const projectIssue of projectIssueResults) {
         await iteratee(projectIssue);
@@ -182,15 +177,14 @@ export class APIClient {
     organizationSlug: string,
     iteratee: ResourceIteratee<SentryUser>,
   ): Promise<void> {
-    const url = `${this.sentryBaseUrl}organizations/${organizationSlug}/members/`;
-    let moreData = true;
+    let url = `${this.sentryBaseUrl}organizations/${organizationSlug}/members/`;
 
-    while (moreData) {
+    while (url) {
       const userResponse = await this.axiosInstance.get(url);
       const userResults = userResponse.data;
 
       const userHeaders = userResponse.headers;
-      moreData = Boolean(userHeaders.results); //results=true when more than 100 results are available
+      url = this.getNextUrl(userHeaders.link); //results=true when more than 100 results are available
 
       for (const user of userResults) {
         await iteratee(user);
@@ -210,20 +204,30 @@ export class APIClient {
     teamSlug: string,
     iteratee: ResourceIteratee<SentryUser>,
   ): Promise<void> {
-    const url = `${this.sentryBaseUrl}teams/${orgSlug}/${teamSlug}/members/`;
-    let moreData = true;
+    let url = `${this.sentryBaseUrl}teams/${orgSlug}/${teamSlug}/members/`;
 
-    while (moreData) {
+    while (url) {
       const teamAssignmentResponse = await this.axiosInstance.get(url);
       const teamAssignmentResults = teamAssignmentResponse.data;
 
       const teamAssignmentHeaders = teamAssignmentResponse.headers;
-      moreData = Boolean(teamAssignmentHeaders.results); //results=true when more than 100 results are available
+      url = this.getNextUrl(teamAssignmentHeaders.link); //results=true when more than 100 results are available
 
       for (const member of teamAssignmentResults) {
         await iteratee(member);
       }
     }
+  }
+
+  private getNextUrl(linkHeader?: string): string | undefined {
+    if (linkHeader) {
+      const parsed = parse(linkHeader);
+      if (parsed.next.results == 'true') {
+        return parsed.next.url;
+      }
+      return;
+    }
+    return;
   }
 }
 
