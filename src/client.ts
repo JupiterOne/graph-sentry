@@ -87,7 +87,7 @@ export class APIClient {
       const orgRepoResults = orgRepoResponse.data;
 
       const orgRepoHeaders = orgRepoResponse.headers;
-      url = this.getNextUrl(orgRepoHeaders.link);
+      url = this.getNextUrl(orgRepoHeaders.link); //results=true when more than 100 results are available
       for (const orgRepo of orgRepoResults) {
         await iteratee(orgRepo);
       }
@@ -231,6 +231,9 @@ export class APIClient {
     }
   }
 
+  /***
+   * https://docs.sentry.io/api/pagination/
+   * ***/
   private getNextUrl(linkHeader?: string): string | undefined {
     if (linkHeader) {
       const parsed = parse(linkHeader);
