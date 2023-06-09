@@ -78,7 +78,9 @@ export class APIClient {
   public async iterateOrganizationRepositories(
     iteratee: ResourceIteratee<SentryOrganizationRepository>,
   ): Promise<void> {
-    let url = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/repos/`;
+    let url:
+      | string
+      | undefined = `${this.sentryBaseUrl}organizations/${this.sentryOrganization}/repos/`;
 
     while (url) {
       const orgRepoResponse = await this.axiosInstance.get(url);
@@ -102,7 +104,9 @@ export class APIClient {
     organizationSlug: string,
     iteratee: ResourceIteratee<SentryTeam>,
   ): Promise<void> {
-    let url = `${this.sentryBaseUrl}organizations/${organizationSlug}/teams/`;
+    let url:
+      | string
+      | undefined = `${this.sentryBaseUrl}organizations/${organizationSlug}/teams/`;
 
     while (url) {
       const teamResponse = await this.axiosInstance.get(url);
@@ -127,7 +131,9 @@ export class APIClient {
     organizationSlug: string,
     iteratee: ResourceIteratee<SentryProject>,
   ): Promise<void> {
-    let url = `${this.sentryBaseUrl}organizations/${organizationSlug}/projects/`;
+    let url:
+      | string
+      | undefined = `${this.sentryBaseUrl}organizations/${organizationSlug}/projects/`;
 
     while (url) {
       const projectResponse = await this.axiosInstance.get(url);
@@ -152,7 +158,9 @@ export class APIClient {
     projectSlug: string,
     iteratee: ResourceIteratee<SentryIssue>,
   ): Promise<void> {
-    let url = `${this.sentryBaseUrl}projects/${this.sentryOrganization}/${projectSlug}/issues/`;
+    let url:
+      | string
+      | undefined = `${this.sentryBaseUrl}projects/${this.sentryOrganization}/${projectSlug}/issues/`;
 
     while (url) {
       const projectIssueResponse = await this.axiosInstance.get(url);
@@ -177,7 +185,9 @@ export class APIClient {
     organizationSlug: string,
     iteratee: ResourceIteratee<SentryUser>,
   ): Promise<void> {
-    let url = `${this.sentryBaseUrl}organizations/${organizationSlug}/members/`;
+    let url:
+      | string
+      | undefined = `${this.sentryBaseUrl}organizations/${organizationSlug}/members/`;
 
     while (url) {
       const userResponse = await this.axiosInstance.get(url);
@@ -204,7 +214,9 @@ export class APIClient {
     teamSlug: string,
     iteratee: ResourceIteratee<SentryUser>,
   ): Promise<void> {
-    let url = `${this.sentryBaseUrl}teams/${orgSlug}/${teamSlug}/members/`;
+    let url:
+      | string
+      | undefined = `${this.sentryBaseUrl}teams/${orgSlug}/${teamSlug}/members/`;
 
     while (url) {
       const teamAssignmentResponse = await this.axiosInstance.get(url);
