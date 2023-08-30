@@ -31,6 +31,7 @@ export async function buildOrgRepoRelationship({
       }
 
       await apiClient.iterateOrganizationRepositories(async (repo) => {
+        if (repo.url) return;
         await jobState.addRelationship(
           createMappedRelationship({
             _class: MappedRelationships.ORGANIZATION_HAS_REPO._class,
