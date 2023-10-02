@@ -33,15 +33,17 @@ export async function fetchProjectIssues({
       }
 
       await apiClient.iterateProjectIssues(project.slug, async (issue) => {
-        const findingEntity = await jobState.addEntity(
-          createFindingEntity(issue),
-        );
+        const findingEntity = createFindingEntity(issue);
+
+        if (jobState.hasKey(findingEntity._key)) return;
+
+        const addedFindingEntity = await jobState.addEntity(findingEntity);
 
         await jobState.addRelationships([
           createDirectRelationship({
             _class: RelationshipClass.HAS,
             from: projectEntity,
-            to: findingEntity,
+            to: addedFindingEntity,
           }),
         ]);
       });
