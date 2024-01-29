@@ -32,32 +32,29 @@ export async function buildOrgRepoRelationship({
 
       await apiClient.iterateOrganizationRepositories(async (repo) => {
         if (!repo.url) return;
-        try {
-          await jobState.addRelationship(
-            createMappedRelationship({
-              _class: MappedRelationships.ORGANIZATION_HAS_REPO._class,
-              _type: MappedRelationships.ORGANIZATION_HAS_REPO._type,
-              _mapping: {
-                relationshipDirection:
-                  MappedRelationships.ORGANIZATION_HAS_REPO.direction,
-                sourceEntityKey: orgEntity._key,
-                targetFilterKeys: [['webLink', '_class']],
-                targetEntity: {
-                  _class: 'CodeRepo',
-                  webLink: repo.url,
-                },
-              },
-            }),
+
+        const orgHasRepo = createMappedRelationship({
+          _class: MappedRelationships.ORGANIZATION_HAS_REPO._class,
+          _type: MappedRelationships.ORGANIZATION_HAS_REPO._type,
+          _mapping: {
+            relationshipDirection:
+              MappedRelationships.ORGANIZATION_HAS_REPO.direction,
+            sourceEntityKey: orgEntity._key,
+            targetFilterKeys: [['webLink', '_class']],
+            targetEntity: {
+              _class: 'CodeRepo',
+              webLink: repo.url,
+            },
+          },
+        });
+        if (jobState.hasKey(orgHasRepo._key)) {
+          logger.info(
+            { _key: orgHasRepo._key },
+            'Duplicated key detected while creating org has repo.  Skipping.',
           );
-        } catch (error) {
-          if (error.code == 'DUPLICATE_KEY_DETECTED') {
-            logger.info(
-              { error, repo },
-              'Duplicated key detected while creating org has repo.',
-            );
-          } else {
-            throw error;
-          }
+          return;
+        } else {
+          await jobState.addRelationship(orgHasRepo);
         }
       });
     },
