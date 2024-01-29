@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-sentry",
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "JupiterOne integration for ingesting data from Sentry.io",
   "repository": {
     "type": "git",
